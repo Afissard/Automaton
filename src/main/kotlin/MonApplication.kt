@@ -13,7 +13,7 @@ class MonApplication {
 
         val autoTypeInput = getIntInput()
         if (autoTypeInput < 1 || autoTypeInput > AutomatonType.entries.size) {
-            println("Invalid input. Please enter a valid integer.")
+            //println("Invalid input. Please enter a valid integer.")
             return
         }
         val automaton = Automaton.createAutomaton(AutomatonType.entries[autoTypeInput - 1])
@@ -25,7 +25,8 @@ class MonApplication {
         }
 
         try {
-            automaton.checkWord(wordInput)
+            val res = automaton.checkWord(wordInput)
+            println("Le mot '$wordInput' est ${if (res) "accepté" else "refusé"}")
         } catch (e: AutomatonExeption) {
             println(e.message)
         }
