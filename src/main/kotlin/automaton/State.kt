@@ -4,8 +4,8 @@ class State(val name:String) {
     private val transitions:HashMap<Char, State> = hashMapOf()
 
     fun addTransition(toState:State, letter:Char){
-        if (transitions.containsKey(letter)){
-            throw AutomatonExeption("'$letter' already have a transition from this state")
+        require(!transitions.containsKey(letter)) {
+            "'$letter' already have a transition from this state"
         }
         transitions[letter] = toState
     }

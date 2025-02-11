@@ -12,6 +12,7 @@ open class Automaton protected constructor() : AutomatonInterface {
                 AutomatonType.SMILEY -> AutomatonSMILEY()
                 AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smileyJson.json")
                 AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
+                AutomatonType.HOUR -> AutomatonCUSTOM("src/main/resources/hhmm.json")
                 AutomatonType.DATE -> TODO()
                 AutomatonType.EMAIL -> TODO()
                 AutomatonType.CUSTOM -> TODO()
@@ -68,10 +69,9 @@ open class Automaton protected constructor() : AutomatonInterface {
 
         while (!finalStates.contains(currentState) && states.containsValue(currentState) && currentCharIndex < word.length) {
             currentState = currentState.getNextState(word[currentCharIndex])
-            //println("${currentState.name} ${word[currentCharIndex]}")
+            println("${currentState.name} ${word[currentCharIndex]}")
             currentCharIndex ++
         }
-
         if (!finalStates.contains(currentState)) {
             throw AutomatonExeption("${currentState.name} is not a final state")
         }

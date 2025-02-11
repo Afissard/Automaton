@@ -24,6 +24,16 @@ class AutomatonSMILEYTest(){
     }
 
     @Test
+    fun testWrongWord_1(){
+        assertFalse(smiley.checkWord("]-("))
+    }
+
+    @Test
+    fun testWrongWord_2(){
+        assertFalse(smiley.checkWord("])"))
+    }
+
+    @Test
     fun testWordIncomplete(){
         assertThrows<AutomatonExeption> {
             smiley.checkWord(":-")
