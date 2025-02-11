@@ -14,7 +14,7 @@ open class Automaton protected constructor() : AutomatonInterface {
                 AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smileyJson.json")
                 AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
                 AutomatonType.HOUR -> AutomatonCUSTOM("src/main/resources/hhmm.json")
-                AutomatonType.DATE -> TODO()
+                AutomatonType.DATE -> AutomatonCUSTOM("src/main/resources/ddmmyyyy.json")
                 AutomatonType.CUSTOM -> TODO()
             }
         }
@@ -39,9 +39,9 @@ open class Automaton protected constructor() : AutomatonInterface {
         for (transition in automatonData.transitions) {
             require(states.containsKey(transition.from)) {"${transition.from} does not exist"}
             require(states.containsKey(transition.to)) {"${transition.to} does not exist"}
-            for (letter in transition.letter) {
-                require(automatonData.alphabet.contains(letter) || letter == errorChar) {"$letter is not defined in the alphabet"}
-                states[transition.from]!!.addTransition(states[transition.to]!!, letter)
+            for (label in transition.label) {
+                require(automatonData.alphabet.contains(label) || label == errorChar) {"$label is not defined in the alphabet"}
+                states[transition.from]!!.addTransition(states[transition.to]!!, label)
             }
         }
 

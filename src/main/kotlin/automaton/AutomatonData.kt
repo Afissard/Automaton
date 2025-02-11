@@ -12,4 +12,4 @@ data class AutomatonData(
 )
 
 @Serializable
-data class TransitionData(val from: String,val to: String, val letter: ArrayList<Char>)
+data class TransitionData(val from: String,val to: String, val label: ArrayList<Char>)
