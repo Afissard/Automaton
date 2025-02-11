@@ -35,7 +35,7 @@ class AutomatonHHMMTest {
 
     @Test
     fun testIncompleteTime() {
-        assertThrows<AutomatonExeption> {
+        assertThrows<IllegalStateException> {
             hourAutomaton.checkWord("12:")
         }
     }

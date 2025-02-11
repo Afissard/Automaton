@@ -4,8 +4,8 @@
   "initialState": "e1",
   "finalStates": ["e4"],
   "transitions": [
-    {"from": "e1","to": "e2", "letter": "a"},
-    {"from": "e2","to": "e3", "letter": "b"},
-    {"from": "e3","to": "e4", "letter": "c"}
+    {"from": "e1","to": "e2", "letter": ["a"]},
+    {"from": "e2","to": "e3", "letter": ["b"]},
+    {"from": "e3","to": "e4", "letter": ["c"]}
   ]
 }

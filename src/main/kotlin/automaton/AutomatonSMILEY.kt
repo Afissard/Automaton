@@ -9,15 +9,12 @@ class AutomatonSMILEY() : Automaton() {
             initialState = "e1",
             finalStates = arrayListOf("e5"),
             transitions = arrayListOf(
-                TransitionData("e1", "e2", ':'),
-                TransitionData("e1", "e3", ';'),
-                TransitionData("e1", "e3", ']'),
-                TransitionData("e2", "e5", '('),
-                TransitionData("e2", "e5", ')'),
-                TransitionData("e2", "e4", '-'),
-                TransitionData("e2", "e4", '='),
-                TransitionData("e3", "e4", '-'),
-                TransitionData("e4", "e5", ')')
+                TransitionData("e1", "e2", arrayListOf(':')),
+                TransitionData("e1", "e3", arrayListOf(';', ']')),
+                TransitionData("e2", "e5", arrayListOf('(', ')')),
+                TransitionData("e2", "e4", arrayListOf('-', '=')),
+                TransitionData("e3", "e4", arrayListOf('-')),
+                TransitionData("e4", "e5", arrayListOf(')'))
             )
         )
 

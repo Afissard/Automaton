@@ -4,7 +4,8 @@ open class Automaton protected constructor() : AutomatonInterface {
     protected lateinit var automatonData: AutomatonData
     private val states: HashMap<String, State> = hashMapOf()
     private lateinit var initialState:State
-    private val finalStates:ArrayList<State> = arrayListOf()
+    private var finalStates:ArrayList<State> = arrayListOf()
+    private val errorChar: Char = ' '
 
     companion object {
         fun createAutomaton(automatonType: AutomatonType): Automaton {
@@ -14,7 +15,6 @@ open class Automaton protected constructor() : AutomatonInterface {
                 AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
                 AutomatonType.HOUR -> AutomatonCUSTOM("src/main/resources/hhmm.json")
                 AutomatonType.DATE -> TODO()
-                AutomatonType.EMAIL -> TODO()
                 AutomatonType.CUSTOM -> TODO()
             }
         }
@@ -31,20 +31,18 @@ open class Automaton protected constructor() : AutomatonInterface {
             }
             states[state] = State(state)
             if (state != "error") {
-                automatonData.transitions.add(TransitionData(state, "error", ' '))
+                automatonData.transitions.add(TransitionData(state, "error", arrayListOf(errorChar)))
             }
         }
 
         // transitions
         for (transition in automatonData.transitions) {
-            if (!states.containsKey(transition.from)) {
-                throw IllegalArgumentException("${transition.from} does not exist")
-            } else if (!states.containsKey(transition.to)) {
-                throw IllegalArgumentException("${transition.to} does not exist")
-            } else if (!automatonData.alphabet.contains(transition.letter) && transition.letter != ' ') {
-                throw IllegalArgumentException("${transition.letter} is not defined in the alphabet")
+            require(states.containsKey(transition.from)) {"${transition.from} does not exist"}
+            require(states.containsKey(transition.to)) {"${transition.to} does not exist"}
+            for (letter in transition.letter) {
+                require(automatonData.alphabet.contains(letter) || letter == errorChar) {"$letter is not defined in the alphabet"}
+                states[transition.from]!!.addTransition(states[transition.to]!!, letter)
             }
-            states[transition.from]!!.addTransition(states[transition.to]!!, transition.letter)
         }
 
         // initial state
@@ -72,9 +70,9 @@ open class Automaton protected constructor() : AutomatonInterface {
             println("${currentState.name} ${word[currentCharIndex]}")
             currentCharIndex ++
         }
-        if (!finalStates.contains(currentState)) {
-            throw AutomatonExeption("${currentState.name} is not a final state")
-        }
+
+        check(finalStates.contains(currentState)) { "${currentState.name} is not a final state" }
+
         if (currentCharIndex < word.length) {
             //throw AutomatonExeption("${word[currentCharIndex]} is not the last character but the automaton reach a final state")
             return false

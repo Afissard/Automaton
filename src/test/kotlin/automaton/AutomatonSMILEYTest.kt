@@ -35,7 +35,7 @@ class AutomatonSMILEYTest(){
 
     @Test
     fun testWordIncomplete(){
-        assertThrows<AutomatonExeption> {
+        assertThrows<IllegalStateException> {
             smiley.checkWord(":-")
         }
     }

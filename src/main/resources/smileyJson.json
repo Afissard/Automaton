@@ -4,14 +4,11 @@
   "initialState": "e1",
   "finalStates": ["e5"],
   "transitions": [
-    {"from": "e1","to": "e2", "letter": ":"},
-    {"from": "e1","to": "e3", "letter": ";"},
-    {"from": "e1","to": "e3", "letter": "]"},
-    {"from": "e2","to": "e5", "letter": "("},
-    {"from": "e2","to": "e5", "letter": ")"},
-    {"from": "e2","to": "e4", "letter": "-"},
-    {"from": "e2","to": "e4", "letter": "="},
-    {"from": "e3","to": "e4", "letter": "-"},
-    {"from": "e4","to": "e5", "letter": ")"}
+    {"from": "e1","to": "e2", "letter": [":"]},
+    {"from": "e1","to": "e3", "letter": [";", "]"]},
+    {"from": "e2","to": "e5", "letter": ["(", ")"]},
+    {"from": "e2","to": "e4", "letter": ["-", "="]},
+    {"from": "e3","to": "e4", "letter": ["-"]},
+    {"from": "e4","to": "e5", "letter": [")"]}
   ]
 }

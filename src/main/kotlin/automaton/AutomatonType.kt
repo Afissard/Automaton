@@ -6,6 +6,5 @@ enum class AutomatonType(val descrition:String) {
     ABC("A basic automaton to produce 'abc'"),
     HOUR("Automaton for time in JJ:HH:MM format (not implemented)"),
     DATE("Automaton for date in DD/MM/YYYY format (not implemented)"),
-    EMAIL("Automaton for email (not implemented)"),
     CUSTOM("Use your own automaton (not implemented)")
 }
