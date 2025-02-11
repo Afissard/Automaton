@@ -10,7 +10,7 @@ open class Automaton protected constructor() : AutomatonInterface {
         fun createAutomaton(automatonType: AutomatonType): Automaton {
             return when (automatonType) {
                 AutomatonType.SMILEY -> AutomatonSMILEY()
-                AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smileyAutomaton.json")
+                AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smileyJson.json")
                 AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
                 AutomatonType.DATE -> TODO()
                 AutomatonType.EMAIL -> TODO()
@@ -20,12 +20,18 @@ open class Automaton protected constructor() : AutomatonInterface {
     }
 
     override fun initFromAutomatonData() {
+        // add error state
+        automatonData.states.add("error")
+
         // states
         for (state in automatonData.states) {
             if (states.containsKey(state)) {
                 throw IllegalArgumentException("$state already exists")
             }
             states[state] = State(state)
+            if (state != "error") {
+                automatonData.transitions.add(TransitionData(state, "error", ' '))
+            }
         }
 
         // transitions
@@ -34,7 +40,7 @@ open class Automaton protected constructor() : AutomatonInterface {
                 throw IllegalArgumentException("${transition.from} does not exist")
             } else if (!states.containsKey(transition.to)) {
                 throw IllegalArgumentException("${transition.to} does not exist")
-            } else if (!automatonData.alphabet.contains(transition.letter)) {
+            } else if (!automatonData.alphabet.contains(transition.letter) && transition.letter != ' ') {
                 throw IllegalArgumentException("${transition.letter} is not defined in the alphabet")
             }
             states[transition.from]!!.addTransition(states[transition.to]!!, transition.letter)
@@ -53,6 +59,7 @@ open class Automaton protected constructor() : AutomatonInterface {
             }
             finalStates.add(states[s]!!)
         }
+        finalStates.add(states["error"]!!)
     }
 
     override fun checkWord(word: String): Boolean {
@@ -61,7 +68,7 @@ open class Automaton protected constructor() : AutomatonInterface {
 
         while (!finalStates.contains(currentState) && states.containsValue(currentState) && currentCharIndex < word.length) {
             currentState = currentState.getNextState(word[currentCharIndex])
-            println("${currentState.name} ${word[currentCharIndex]}")
+            //println("${currentState.name} ${word[currentCharIndex]}")
             currentCharIndex ++
         }
 
@@ -69,7 +76,11 @@ open class Automaton protected constructor() : AutomatonInterface {
             throw AutomatonExeption("${currentState.name} is not a final state")
         }
         if (currentCharIndex < word.length) {
-            throw AutomatonExeption("${word[currentCharIndex]} is not the last character but the automaton reach a final state")
+            //throw AutomatonExeption("${word[currentCharIndex]} is not the last character but the automaton reach a final state")
+            return false
+        }
+        if (currentState.name == "error") {
+            return false
         }
 
         return true

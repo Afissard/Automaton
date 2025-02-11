@@ -32,16 +32,12 @@ class AutomatonSMILEYTest(){
 
     @Test
     fun testWordTooLong(){
-        assertThrows<AutomatonExeption> {
-            assertFalse(smiley.checkWord(":-):)"))
-        }
+        assertFalse(smiley.checkWord(":-):)"))
     }
 
     @Test
     fun testUnknowChar(){
-        assertThrows<AutomatonExeption> {
-            assertFalse(smiley.checkWord(":-/"))
-        }
+        assertFalse(smiley.checkWord(":-/"))
     }
 
     @Test
