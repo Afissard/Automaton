@@ -15,7 +15,6 @@ open class Automaton protected constructor() : AutomatonInterface {
                 AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
                 AutomatonType.HOUR -> AutomatonCUSTOM("src/main/resources/hhmm.json")
                 AutomatonType.DATE -> AutomatonCUSTOM("src/main/resources/ddmmyyyy.json")
-                AutomatonType.CUSTOM -> TODO()
             }
         }
     }
