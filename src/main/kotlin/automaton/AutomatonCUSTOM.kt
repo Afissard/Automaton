@@ -10,7 +10,7 @@ class AutomatonCUSTOM(filePath: String) : Automaton() {
         automatonData = Json.decodeFromString(jsonString)
         initFromAutomatonData()
 
-        // temp :
-        automatonData.toDotFile("src/main/resources/automaton.dot")
+        val dotFilePath = filePath.replaceAfterLast(".", "dot")
+        automatonData.toDotFile(dotFilePath)
     }
 }

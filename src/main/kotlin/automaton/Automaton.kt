@@ -11,7 +11,7 @@ open class Automaton protected constructor() : AutomatonInterface {
         fun createAutomaton(automatonType: AutomatonType): Automaton {
             return when (automatonType) {
                 AutomatonType.SMILEY -> AutomatonSMILEY()
-                AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smileyJson.json")
+                AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smiley.json")
                 AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
                 AutomatonType.HOUR -> AutomatonCUSTOM("src/main/resources/hhmm.json")
                 AutomatonType.DATE -> AutomatonCUSTOM("src/main/resources/ddmmyyyy.json")
