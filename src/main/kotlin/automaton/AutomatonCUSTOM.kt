@@ -9,5 +9,8 @@ class AutomatonCUSTOM(filePath: String) : Automaton() {
         val jsonString = File(filePath).readText()
         automatonData = Json.decodeFromString(jsonString)
         initFromAutomatonData()
+
+        // temp :
+        automatonData.toDotFile("src/main/resources/automaton.dot")
     }
 }
