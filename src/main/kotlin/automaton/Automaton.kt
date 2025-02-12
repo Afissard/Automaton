@@ -1,5 +1,8 @@
 package automaton
 
+/**
+ * Base class for automaton implementations.
+ */
 open class Automaton protected constructor() : AutomatonInterface {
     protected lateinit var automatonData: AutomatonData
     private val states: HashMap<String, State> = hashMapOf()
@@ -8,6 +11,12 @@ open class Automaton protected constructor() : AutomatonInterface {
     private val errorChar: Char = ' '
 
     companion object {
+        /**
+         * Factory method to create an automaton of the specified type.
+         *
+         * @param automatonType The type of automaton to create.
+         * @return The created automaton.
+         */
         fun createAutomaton(automatonType: AutomatonType): Automaton {
             return when (automatonType) {
                 AutomatonType.SMILEY -> AutomatonSMILEY()
@@ -19,6 +28,9 @@ open class Automaton protected constructor() : AutomatonInterface {
         }
     }
 
+    /**
+     * Initializes the automaton from the automaton data.
+     */
     override fun initFromAutomatonData() {
         // add error state
         automatonData.states.add("error")
@@ -54,6 +66,12 @@ open class Automaton protected constructor() : AutomatonInterface {
         finalStates.add(states["error"]!!)
     }
 
+    /**
+     * Checks if the given word is accepted by the automaton.
+     *
+     * @param word The word to check.
+     * @return True if the word is accepted, false otherwise.
+     */
     override fun checkWord(word: String): Boolean {
         println("vérification de '$word'")
 

@@ -3,7 +3,15 @@ package automaton
 import kotlinx.serialization.Serializable
 import java.io.File
 
-
+/**
+ * Data class representing the automaton data.
+ *
+ * @property alphabet The alphabet of the automaton.
+ * @property states The states of the automaton.
+ * @property initialState The initial state of the automaton.
+ * @property finalStates The final states of the automaton.
+ * @property transitions The transitions of the automaton.
+ */
 @Serializable
 data class AutomatonData(
     val alphabet: ArrayList<Char>,
@@ -13,10 +21,21 @@ data class AutomatonData(
     val transitions: ArrayList<TransitionData>
 )
 
+/**
+ * Data class representing a transition in the automaton.
+ *
+ * @property from The starting state of the transition.
+ * @property to The ending state of the transition.
+ * @property label The labels for the transition.
+ */
 @Serializable
 data class TransitionData(val from: String,val to: String, val label: ArrayList<Char>)
 
-
+/**
+ * Extension function to generate a DOT file from the automaton data.
+ *
+ * @param filePath The path where the DOT file will be saved.
+ */
 fun AutomatonData.toDotFile(filePath: String) {
     val dotContent = StringBuilder()
     dotContent.append("digraph Automaton {\n")

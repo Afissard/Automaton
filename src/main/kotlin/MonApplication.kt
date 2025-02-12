@@ -1,8 +1,14 @@
 import automaton.Automaton
-import automaton.AutomatonExeption
 import automaton.AutomatonType
 
+/**
+ * Main application class for running the automaton-based application.
+ */
 class MonApplication {
+
+    /**
+     * Runs the application, displaying a menu and processing user input.
+     */
     fun run(){
         println("---------- Nantes Université, BUT2 Informatique, 2025 ------------\n------- TP - Modélisation et analyse à l’aide des automates -------")
         println("------- Menu de l’application (développée par Sacha Chauvel) -------")
@@ -35,7 +41,11 @@ class MonApplication {
         println("------------------------------------------------------------------")
     }
 
-
+    /**
+     * Reads an integer input from the user.
+     *
+     * @return The integer input from the user.
+     */
     private fun getIntInput(): Int {
         var input: Int? = null
         while (input == null) {
@@ -50,6 +60,9 @@ class MonApplication {
 
 }
 
+/**
+ * Main function to start the application.
+ */
 fun main() {
     MonApplication().run()
 }

@@ -1,7 +1,13 @@
 package automaton
 
+/**
+ * Class representing an automaton for recognizing smiley faces.
+ */
 class AutomatonSMILEY() : Automaton() {
 
+    /**
+     * Initializes the automaton with predefined states, alphabet, and transitions.
+     */
     init {
         automatonData = AutomatonData(
             alphabet = arrayListOf(';', ':', ']', '(', ')', '-', '='),
