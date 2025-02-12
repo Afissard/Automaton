@@ -5,7 +5,7 @@ class State(val name:String) {
 
     fun addTransition(toState:State, letter:Char){
         require(!transitions.containsKey(letter)) {
-            "'$letter' already have a transition from this state"
+            "'$letter' already have a transition from $name"
         }
         transitions[letter] = toState
     }

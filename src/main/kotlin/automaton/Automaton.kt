@@ -26,9 +26,7 @@ open class Automaton protected constructor() : AutomatonInterface {
 
         // states
         for (state in automatonData.states) {
-            if (states.containsKey(state)) {
-                throw IllegalArgumentException("$state already exists")
-            }
+            require(!states.containsKey(state)) {"$state already exists"}
             states[state] = State(state)
             if (state != "error") {
                 automatonData.transitions.add(TransitionData(state, "error", arrayListOf(errorChar)))
@@ -46,28 +44,26 @@ open class Automaton protected constructor() : AutomatonInterface {
         }
 
         // initial state
-        if (!states.containsKey(automatonData.initialState)) {
-            throw AutomatonExeption("No initial state defined")
-        }
+        check(states.containsKey(automatonData.initialState)) { "Initial state ${automatonData.initialState} is not defined" }
         initialState = states[automatonData.initialState]!!
 
         // final state
         for (s in automatonData.finalStates) {
-            if (!states.containsKey(s)){
-                throw AutomatonExeption("$s is not defined as a state")
-            }
+            check(states.containsKey(s)) { "$s is not defined as a state" }
             finalStates.add(states[s]!!)
         }
         finalStates.add(states["error"]!!)
     }
 
     override fun checkWord(word: String): Boolean {
+        println("vérification de '$word'")
+
         var currentState = initialState
         var currentCharIndex = 0
 
         while (!finalStates.contains(currentState) && states.containsValue(currentState) && currentCharIndex < word.length) {
+            println("${currentState.name} -> ${currentState.getNextState(word[currentCharIndex]).name} \t ${word[currentCharIndex]}")
             currentState = currentState.getNextState(word[currentCharIndex])
-            println("${currentState.name} ${word[currentCharIndex]}")
             currentCharIndex ++
         }
 
@@ -77,6 +73,7 @@ open class Automaton protected constructor() : AutomatonInterface {
             //throw AutomatonExeption("${word[currentCharIndex]} is not the last character but the automaton reach a final state")
             return false
         }
+
         if (currentState.name == "error") {
             return false
         }
