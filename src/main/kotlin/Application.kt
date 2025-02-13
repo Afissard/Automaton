@@ -1,11 +1,10 @@
 import automaton.Automaton
 import java.io.File
-import java.io.InputStream
 
 /**
  * Main application class for running the automaton-based application.
  */
-class MonApplication (
+class Application (
     private val resourcePath:String
 ) {
     init {
@@ -37,7 +36,6 @@ class MonApplication (
             println("1. Vérifier un mot")
             println("2. Générer un mot")
             println("3. Créer un fichier .dot")
-            println("4. Quitter")
 
             when (getIntInput(1, 3)) {
                 1 -> {
@@ -54,7 +52,7 @@ class MonApplication (
                     println("mot générer : ${automaton.generateRandomWord()}")
                 }
                 3 -> {
-                    val filePath = "$resourcePath$selectedFile.dot"
+                    val filePath = "./$selectedFile.dot"
                     automaton.generateDotFile(filePath)
                     println("Fichier .dot créé à l'emplacement: $filePath")
                 }
@@ -92,28 +90,20 @@ class MonApplication (
         return input
     }
 
-    /**
-     * Gets an InputStream for a resource file.
-     *
-     * @param resourcePath The path to the resource file.
-     * @return The InputStream for the resource file.
-     */
-    private fun getResourceAsStream(resourcePath: String): InputStream {
-        return this::class.java.classLoader.getResourceAsStream(resourcePath)
-            ?: throw IllegalArgumentException("Resource not found: $resourcePath")
-    }
-}
+    companion object {
+        /**
+         * Main function to start the application.
+         */
+        @JvmStatic
+        fun main(args: Array<String>) {
+            val resourcePath = if (args.isNotEmpty()) {
+                args[0]
+            } else {
+                println("Resource path not provided. Using default path: ./src/main/resources/")
+                "./src/main/resources/"
+            }
 
-/**
- * Main function to start the application.
- */
-fun main(args: Array<String>) {
-    val resourcePath = if (args.isNotEmpty()) {
-        args[0]
-    } else {
-        println("Resource path not provided. Using default path: ./src/main/resources/")
-        "./src/main/resources/"
+            Application(resourcePath).run()
+        }
     }
-
-    MonApplication(resourcePath).run()
 }
