@@ -4,6 +4,7 @@
 **Cours**: Automates et Languages  
 **Date**: 13/02/2025  
 **Université**: Nantes Université
+**Code source**: https://github.com/Afissard/Automaton
 
 ## Introduction
 Ce rapport présente le travail réalisé sur les automates dans le cadre du cours Automates et Languages. Un automate est un modèle mathématique utilisé pour représenter des systèmes avec des états et des transitions. Ce projet vise à développer une application permettant de vérifier des mots, générer des mots aléatoires et créer des fichiers DOT représentant les automates.
@@ -19,15 +20,15 @@ L'application développée permet de charger des automates définis dans des fic
 - **Automate heures (hhmm)**: Vérifie les heures au format `hh:mm`.
 - **Automate de date (ddmmyyyy)**: Vérifie les dates au format `dd/mm/yyyy`.
 
-![](abc.png)
-![](abcExtended.png)
-![](smiley.png)
-![](hhmm.png)
-![](ddmmyyyy.png)
+![](assets/abc.png)
+![](assets/abcExtended.png)
+![](assets/smiley.png)
+![](assets/hhmm.png)
+![](assets/ddmmyyyy.png)
 
 #### Architecture Logicielle
 
-![](projet_uml.png)
+![](assets/projet_uml.png)
 
 L'application est organisée en plusieurs classes:
 - **MonApplication**: Classe gérant l'interface utilisateur et les interactions avec l'automate.
