@@ -35,8 +35,9 @@ class MonApplication (
 
             println("Choisissez une option:")
             println("1. Vérifier un mot")
-            println("2. Créer un fichier .dot")
-            println("3. Quitter")
+            println("2. Générer un mot")
+            println("3. Créer un fichier .dot")
+            println("4. Quitter")
 
             when (getIntInput(1, 3)) {
                 1 -> {
@@ -50,11 +51,14 @@ class MonApplication (
                     println("Le mot '$wordInput' est ${if (res) "accepté" else "refusé"}")
                 }
                 2 -> {
+                    println("mot générer : ${automaton.generateRandomWord()}")
+                }
+                3 -> {
                     val filePath = "$resourcePath$selectedFile.dot"
                     automaton.generateDotFile(filePath)
                     println("Fichier .dot créé à l'emplacement: $filePath")
                 }
-                3 -> return
+                4 -> return
             }
 
             println("Voulez-vous choisir un autre automate? (oui/non)")

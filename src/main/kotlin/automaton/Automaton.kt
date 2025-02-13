@@ -92,6 +92,25 @@ class Automaton(filePath: String): AutomatonInterface {
     }
 
     /**
+     * Generates a random word by traversing the automaton from the initial state to a final state.
+     *
+     * @return A randomly generated word accepted by the automaton.
+     */
+    override fun generateRandomWord(): String {
+        val word = StringBuilder()
+        var currentState = initialState
+
+        while (!finalStates.contains(currentState)) {
+            val nextState = currentState.getRandomNextState()
+            word.append(nextState.first)
+            currentState = nextState.second
+            println(word)
+        }
+
+        return word.toString()
+    }
+
+    /**
      * Generates a DOT file representation of the automaton.
      *
      * @param filePath The path where the DOT file will be saved.

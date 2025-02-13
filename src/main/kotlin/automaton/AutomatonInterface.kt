@@ -12,12 +12,12 @@ interface AutomatonInterface {
      */
     fun checkWord(word : String) : Boolean
 
-//    /**
-//     * Generates a random word using the automaton.
-//     *
-//     * @return The randomly generated word.
-//     */
-//    fun generateRandomWord(): String
+    /**
+     * Generates a random word.
+     *
+     * @return The random word.
+     */
+    fun generateRandomWord(): String
 
     /**
      * Generates a dot file representing the automaton.
