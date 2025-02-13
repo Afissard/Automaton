@@ -1,5 +1,5 @@
 {
-  "nom": "ddmmyyyy",
+  "name": "ddmmyyyy",
   "description": "Automaton for dates in the format dd/mm/yyyy",
   "alphabet": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "/"],
   "states": ["d0", "d1", "d2", "d3", "d4", "d5", "d6", "d7", "mAll", "mFeb", "mSpe", "m1", "m2", "m3", "m4", "m5", "m6", "m8", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8"],
