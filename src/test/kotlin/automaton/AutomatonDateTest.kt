@@ -10,7 +10,7 @@ class AutomatonDateTest {
 
     @BeforeEach
     fun setUp() {
-        dateAutomaton = Automaton.createAutomaton(AutomatonType.DATE)
+        dateAutomaton = Automaton("src/main/resources/ddmmyyyy.json")
     }
 
     @Test

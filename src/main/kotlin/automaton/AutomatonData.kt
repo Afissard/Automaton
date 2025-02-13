@@ -6,6 +6,8 @@ import java.io.File
 /**
  * Data class representing the automaton data.
  *
+ * @property name The name of the automaton.
+ * @property description The description of the automaton.
  * @property alphabet The alphabet of the automaton.
  * @property states The states of the automaton.
  * @property initialState The initial state of the automaton.
@@ -14,6 +16,8 @@ import java.io.File
  */
 @Serializable
 data class AutomatonData(
+    val name: String,
+    val description: String,
     val alphabet: ArrayList<Char>,
     val states: ArrayList<String>,
     var initialState: String,

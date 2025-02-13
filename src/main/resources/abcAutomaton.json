@@ -1,4 +1,6 @@
 {
+  "name": "abc",
+  "description": "Test automaton only accept : 'abc'",
   "alphabet": ["a", "b", "c"],
   "states": ["e1", "e2", "e3", "e4"],
   "initialState": "e1",

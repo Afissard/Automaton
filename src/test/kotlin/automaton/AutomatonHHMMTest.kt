@@ -10,7 +10,7 @@ class AutomatonHHMMTest {
 
     @BeforeEach
     fun setUp() {
-        hourAutomaton = Automaton.createAutomaton(AutomatonType.HOUR)
+        hourAutomaton = Automaton("src/main/resources/hhmm.json")
     }
 
     @Test

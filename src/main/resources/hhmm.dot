@@ -1,0 +1,15 @@
+digraph Automaton {
+  rankdir=LR;
+  node [shape = doublecircle]; e8;
+  node [shape = circle];
+  e1 -> e2 [label = "0,1"];
+  e1 -> e3 [label = "2"];
+  e2 -> e4 [label = "0,1,2,3,4,5,6,7,8,9"];
+  e3 -> e5 [label = "0,1,2,3"];
+  e4 -> e6 [label = ":"];
+  e5 -> e6 [label = ":"];
+  e6 -> e7 [label = "0,1,2,3,4,5"];
+  e7 -> e8 [label = "0,1,2,3,4,5,6,7,8,9"];
+  e1 [shape = circle];
+  "" [shape = point];  ""-> e1;
+}

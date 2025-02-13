@@ -10,7 +10,7 @@ class AutomatonSMILEYTest(){
 
     @BeforeEach
     fun setUp(){
-        smiley = Automaton.createAutomaton(AutomatonType.SMILEY)
+        smiley = Automaton("src/main/resources/automaton/smileys.json")
     }
 
     @Test

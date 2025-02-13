@@ -1,37 +1,29 @@
 package automaton
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import java.io.File
+
 /**
- * Base class for automaton implementations.
+ * Class representing an automaton.
+ *
+ * @param filePath The path to the JSON file containing the automaton data.
  */
-open class Automaton protected constructor() : AutomatonInterface {
-    protected lateinit var automatonData: AutomatonData
+class Automaton(filePath: String): AutomatonInterface {
+    private var automatonData: AutomatonData
     private val states: HashMap<String, State> = hashMapOf()
-    private lateinit var initialState:State
+    private var initialState:State
     private var finalStates:ArrayList<State> = arrayListOf()
     private val errorChar: Char = ' '
 
-    companion object {
-        /**
-         * Factory method to create an automaton of the specified type.
-         *
-         * @param automatonType The type of automaton to create.
-         * @return The created automaton.
-         */
-        fun createAutomaton(automatonType: AutomatonType): Automaton {
-            return when (automatonType) {
-                AutomatonType.SMILEY -> AutomatonSMILEY()
-                AutomatonType.SMILEY_JSON -> AutomatonCUSTOM("src/main/resources/smiley.json")
-                AutomatonType.ABC -> AutomatonCUSTOM("src/main/resources/abcAutomaton.json")
-                AutomatonType.HOUR -> AutomatonCUSTOM("src/main/resources/hhmm.json")
-                AutomatonType.DATE -> AutomatonCUSTOM("src/main/resources/ddmmyyyy.json")
-            }
-        }
-    }
-
     /**
-     * Initializes the automaton from the automaton data.
+     * Initializes the automaton by reading the JSON file, setting up states and transitions,
+     * and defining the initial and final states.
      */
-    override fun initFromAutomatonData() {
+    init {
+        val jsonString = File(filePath).readText()
+        automatonData = Json.decodeFromString(jsonString)
+
         // add error state
         automatonData.states.add("error")
 
@@ -66,6 +58,7 @@ open class Automaton protected constructor() : AutomatonInterface {
         finalStates.add(states["error"]!!)
     }
 
+
     /**
      * Checks if the given word is accepted by the automaton.
      *
@@ -96,5 +89,24 @@ open class Automaton protected constructor() : AutomatonInterface {
         }
 
         return true
+    }
+
+    /**
+     * Generates a DOT file representation of the automaton.
+     *
+     * @param filePath The path where the DOT file will be saved.
+     */
+    override fun generateDotFile(filePath: String) {
+        val dotFilePath = filePath.replaceAfterLast(".", "dot")
+        automatonData.toDotFile(dotFilePath)
+    }
+
+    /**
+     * Returns a string representation of the automaton.
+     *
+     * @return A string describing the automaton.
+     */
+    override fun toString(): String {
+        return "automaton : ${automatonData.name} : ${automatonData.description}"
     }
 }
