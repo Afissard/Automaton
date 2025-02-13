@@ -104,7 +104,6 @@ class Automaton(filePath: String): AutomatonInterface {
             val nextState = currentState.getRandomNextState()
             word.append(nextState.first)
             currentState = nextState.second
-            println(word)
         }
 
         return word.toString()

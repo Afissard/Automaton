@@ -1,0 +1,15 @@
+{
+  "name": "abcExtended",
+  "description": "Extended automaton to cover multiple labels and paths",
+  "alphabet": ["a", "b", "c", "d", "e"],
+  "states": ["e1", "e2", "e3", "e4", "e5"],
+  "initialState": "e1",
+  "finalStates": ["e4", "e5"],
+  "transitions": [
+    {"from": "e1", "to": "e2", "label": ["a"]},
+    {"from": "e1", "to": "e3", "label": ["b"]},
+    {"from": "e2", "to": "e4", "label": ["c", "d"]},
+    {"from": "e3", "to": "e4", "label": ["c"]},
+    {"from": "e1", "to": "e5", "label": ["e"]}
+  ]
+}

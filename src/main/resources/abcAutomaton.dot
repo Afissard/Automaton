@@ -1,0 +1,10 @@
+digraph Automaton {
+  rankdir=LR;
+  node [shape = doublecircle]; e4;
+  node [shape = circle];
+  e1 -> e2 [label = "a"];
+  e2 -> e3 [label = "b"];
+  e3 -> e4 [label = "c"];
+  e1 [shape = circle];
+  "" [shape = point];  ""-> e1;
+}
