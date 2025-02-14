@@ -100,7 +100,8 @@ class Application (
                 args[0]
             } else {
                 println("Resource path not provided. Using default path: ./src/main/resources/")
-                "./src/main/resources/"
+                //"./src/main/resources/"
+                "./"
             }
 
             Application(resourcePath).run()
